@@ -6,7 +6,7 @@ steps:
 
   # Push Docker image to GCR
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/constant-host-448316-e1/api-fetcher']
+    args: ['push', 'gcr.io/constant-host-448316-e1/api-fetcher-cb']
 
   # Apply Terraform configuration
   - name: 'hashicorp/terraform:latest'
