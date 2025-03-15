@@ -1,12 +1,12 @@
 provider "google" {
   // credentials = file("path/to/your/service-account-key.json")
   project     = "constant-host-448316-e1"
-  region      = "us-west2"
+  region      = "europe-west2"
 }
 
 resource "google_cloud_run_service" "api_fetcher" {
   name     = "api-fetcher"
-  location = "us-west2"
+  location = "europe-west2"
 
   template {
     spec {
