@@ -2,7 +2,7 @@ steps:
 
   # Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/constant-host-448316-e1/api-fetcher-cb', '.']
+    args: ['build', '--cache', '-t', 'gcr.io/constant-host-448316-e1/api-fetcher-cb', '.']
 
   # Push Docker image to GCR
   - name: 'gcr.io/cloud-builders/docker'
