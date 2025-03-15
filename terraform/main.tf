@@ -26,12 +26,12 @@ resource "google_cloud_run_service" "api_fetcher_cb" {
 }
 
 resource "google_cloud_run_service_iam_member" "public_access" {
-  service  = google_cloud_run_service.api_fetcher.name
-  location = google_cloud_run_service.api_fetcher.location
+  service  = google_cloud_run_service.api_fetcher_cb.name
+  location = google_cloud_run_service.api_fetcher_cb.location
   role     = "roles/run.invoker"
   member   = "allUsers"
 }
 
 output "service_url" {
-  value = google_cloud_run_service.api_fetcher.status[0].url
+  value = google_cloud_run_service.api_fetcher_cb.status[0].url
 }
