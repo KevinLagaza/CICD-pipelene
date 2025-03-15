@@ -1,4 +1,5 @@
 steps:
+
   # Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/constant-host-448316-e1/api-fetcher', '.']
@@ -15,3 +16,12 @@ steps:
   - name: 'hashicorp/terraform:latest'
     args: ['apply', '-auto-approve']
     dir: 'terraform'
+    
+# Specify the custom service account
+serviceAccount: "751137736034-compute@developer.gserviceaccount.com"
+
+# Specify a logs bucket
+logsBucket: "gs://buuld-logs"
+
+options:
+  logging: "CLOUD_LOGGING_ONLY"
