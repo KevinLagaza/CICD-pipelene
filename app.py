@@ -20,6 +20,7 @@ def fetch_data():
         bucket = client.bucket(bucket_name)
         blob = bucket.blob("api_data.json")
         blob.upload_from_string(str(data))
+        return jsonify(data)
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
 
