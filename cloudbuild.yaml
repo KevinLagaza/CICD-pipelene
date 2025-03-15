@@ -1,0 +1,17 @@
+steps:
+  # Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/api-fetcher', '.']
+
+  # Push Docker image to GCR
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/${PROJECT_ID}/api-fetcher']
+
+  # Apply Terraform configuration
+  - name: 'hashicorp/terraform:latest'
+    args: ['init']
+    dir: 'terraform'
+
+  - name: 'hashicorp/terraform:latest'
+    args: ['apply', '-auto-approve']
+    dir: 'terraform'
