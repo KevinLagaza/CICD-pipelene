@@ -4,13 +4,13 @@ provider "google" {
 }
 
 resource "google_cloud_run_service" "api_fetcher" {
-  name     = "api-fetcher"
+  name     = "api-fetcher-cb"
   location = "us-central1"
 
   template {
     spec {
       containers {
-        image = "gcr.io/constant-host-448316-e1/api-fetcher"
+        image = "gcr.io/constant-host-448316-e1/api-fetcher-cb"
         env {
           name  = "GCS_BUCKET_NAME"
           value = "test-cloud-bucket-build"
