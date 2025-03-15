@@ -1,5 +1,4 @@
 provider "google" {
-  // credentials = file("path/to/your/service-account-key.json")
   project     = "constant-host-448316-e1"
   region      = "us-central1"
 }
