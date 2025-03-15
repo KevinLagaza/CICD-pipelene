@@ -13,6 +13,7 @@ def fetch_data():
     try:
         response = requests.get(API_URL)
         response.raise_for_status()
+        data = response.json()
         # Store data in Google Cloud Storage
         client = storage.Client()
         bucket_name = "test-cloud-bucket-build"
