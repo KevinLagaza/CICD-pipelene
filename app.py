@@ -10,6 +10,7 @@ def fetch_data():
     """ Fetch data from API 
     """
     try:
+        API_URL = os.getenv("API_URL")
         response = requests.get(API_URL)
         response.raise_for_status()
         data = response.json()
