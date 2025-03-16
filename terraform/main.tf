@@ -6,6 +6,7 @@ provider "google" {
 # Fetch the secret from Google Secret Manager
 data "google_secret_manager_secret_version" "my_secret" {
   secret = "API_KEY" # Replace with your secret name
+  version = "1"
 }
 
 resource "google_cloud_run_service" "api_fetcher_cb" {
