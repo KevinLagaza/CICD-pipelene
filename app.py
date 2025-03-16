@@ -16,7 +16,8 @@ def fetch_data():
         data = response.json()
         # Store data in Google Cloud Storage
         client = storage.Client()
-        bucket_name = "test-cloud-bucket-build"
+        bucket_name = os.getenv("GCS_BUCKET_NAME")
+        # "test-cloud-bucket-build"
         bucket = client.bucket(bucket_name)
         blob = bucket.blob("api_data.json")
         blob.upload_from_string(str(data))

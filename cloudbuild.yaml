@@ -2,11 +2,11 @@ steps:
 
   # Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/constant-host-448316-e1/api-fetcher-cb', '.']
+    args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/api-fetcher-cb', '.']
 
   # Push Docker image to GCR
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/constant-host-448316-e1/api-fetcher-cb']
+    args: ['push', 'gcr.io/${_PROJECT_ID}/api-fetcher-cb']
 
   # Apply Terraform configuration
   - name: 'hashicorp/terraform:latest'
@@ -20,5 +20,7 @@ steps:
 # Specify the custom service account
 serviceAccount: "terraform-run-sa@constant-host-448316-e1.iam.gserviceaccount.com"
 
-# Specify a logs bucket
-logsBucket: "gs://buuld-logs"
+# Specify a logs' bucket
+options:
+  logging: GCS_ONLY
+  logsBucket: "gs://cloud-build-ci-cd-logs"

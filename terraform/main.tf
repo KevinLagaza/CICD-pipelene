@@ -1,16 +1,16 @@
 provider "google" {
-  project     = "constant-host-448316-e1"
-  region      = "us-central1"
+  project     = var.project_id
+  region      = var.region
 }
 
 resource "google_cloud_run_service" "api_fetcher_cb" {
   name     = "api-fetcher-cb"
-  location = "us-central1"
+  location = var.region
 
   template {
     spec {
       containers {
-        image = "gcr.io/constant-host-448316-e1/api-fetcher-cb"
+        image = "gcr.io/${var.project_id}/api-fetcher-cb"
         env {
           name  = "GCS_BUCKET_NAME"
           value = "test-cloud-bucket-build"
