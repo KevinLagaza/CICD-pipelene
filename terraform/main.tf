@@ -3,6 +3,11 @@ provider "google" {
   region      = var.region
 }
 
+# Fetch the secret from Google Secret Manager
+data "google_secret_manager_secret_version" "my_secret" {
+  secret = "API_KEY" # Replace with your secret name
+}
+
 resource "google_cloud_run_service" "api_fetcher_cb" {
   name     = "api-fetcher-cb"
   location = var.region
@@ -18,6 +23,10 @@ resource "google_cloud_run_service" "api_fetcher_cb" {
         env {
           name  = "API_URL"
           value = "https://jsonplaceholder.typicode.com/posts"
+        }
+        env {
+          name  = "API_KEY"
+          value = data.google_secret_manager_secret_version.my_secret.secret_data
         }
       }
     }

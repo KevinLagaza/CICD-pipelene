@@ -11,17 +11,18 @@ def fetch_data():
     """
     try:
         API_URL = os.getenv("API_URL")
+        bucket_name = os.getenv("GCS_BUCKET_NAME")
+        api_key = os.getenv("API_KEY")
         response = requests.get(API_URL)
         response.raise_for_status()
         data = response.json()
         # Store data in Google Cloud Storage
         client = storage.Client()
-        bucket_name = os.getenv("GCS_BUCKET_NAME")
         # "test-cloud-bucket-build"
         bucket = client.bucket(bucket_name)
         blob = bucket.blob("api_data.json")
         blob.upload_from_string(str(data))
-        return jsonify(data)
+        return jsonify(data), api_key
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
 
