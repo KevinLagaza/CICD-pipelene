@@ -6,7 +6,6 @@ provider "google" {
 resource "google_cloud_run_service" "api_fetcher_cb" {
   name     = "api-fetcher-cb"
   location = "us-central1"
-
   lifecycle {
     create_before_destroy = false
   }
