@@ -18,7 +18,7 @@ steps:
     dir: 'terraform'
     
 # Specify the custom service account
-serviceAccount: "751137736034-compute@developer.gserviceaccount.com"
+serviceAccount: "terraform-run-sa@constant-host-448316-e1.iam.gserviceaccount.com"
 
 # Specify a logs bucket
 logsBucket: "gs://buuld-logs"
