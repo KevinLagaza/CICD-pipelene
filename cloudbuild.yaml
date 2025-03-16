@@ -21,6 +21,4 @@ steps:
 serviceAccount: "terraform-run-sa@constant-host-448316-e1.iam.gserviceaccount.com"
 
 # Specify a logs' bucket
-options:
-  logging: GCS_ONLY
-  logsBucket: "gs://cloud-build-ci-cd-logs"
+logsBucket: "gs://cloud-build-ci-cd-logs"
