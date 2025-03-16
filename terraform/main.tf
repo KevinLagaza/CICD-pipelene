@@ -15,6 +15,10 @@ resource "google_cloud_run_service" "api_fetcher_cb" {
           name  = "GCS_BUCKET_NAME"
           value = "test-cloud-bucket-build"
         }
+        env {
+          name  = "API_URL"
+          value = "https://jsonplaceholder.typicode.com/posts"
+        }
       }
     }
   }

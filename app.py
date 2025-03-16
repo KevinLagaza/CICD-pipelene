@@ -5,11 +5,10 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-# Fetch data from API
-API_URL = "https://jsonplaceholder.typicode.com/posts"
-
 @app.route("/")
 def fetch_data():
+    """ Fetch data from API 
+    """
     try:
         response = requests.get(API_URL)
         response.raise_for_status()
