@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Fetch data from API
 API_URL = "https://jsonplaceholder.typicode.com/posts"
 
-@app.route("/")
+# @app.route("/")
 def fetch_data():
     try:
         response = requests.get(API_URL)
@@ -25,4 +25,5 @@ def fetch_data():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    # app.run(host="0.0.0.0", port=8080)
+    fetch_data()
