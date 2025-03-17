@@ -9,6 +9,36 @@ data "google_secret_manager_secret_version" "my_secret" {
   version = "1"
 }
 
+resource "google_storage_bucket" "log-bucket" {
+  name          = "test-cloud-bucket-build"
+  location      = "US"
+  force_destroy = true
+
+  lifecycle_rule {
+    condition {
+      age = 3
+    }
+    action {
+      type = "Delete"
+    }
+  }
+}
+
+resource "google_storage_bucket" "cloud-build-bucket" {
+  name          = "cloud-build-ci-cd-logs"
+  location      = "US"
+  force_destroy = true
+
+  lifecycle_rule {
+    condition {
+      age = 3
+    }
+    action {
+      type = "Delete"
+    }
+  }
+}
+
 resource "google_cloud_run_service" "api_fetcher_cb" {
   name     = "api-fetcher-cb"
   location = var.region
