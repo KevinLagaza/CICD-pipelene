@@ -4,6 +4,11 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/api-fetcher-cb', '.']
 
+  # Scan Docker image
+  - name: 'aquasecurity/trivy'
+    entrypoint: 'trivy'
+    args: ['image', 'gcr.io/${_PROJECT_ID}/api-fetcher-cb']
+
   # Push Docker image to GCR
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/${_PROJECT_ID}/api-fetcher-cb']
