@@ -5,7 +5,7 @@ steps:
     args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/api-fetcher-cb', '.']
 
   # Scan Docker image
-  - name: 'aquasecurity/trivy'
+  - name: 'alpine/trivy'
     entrypoint: 'trivy'
     args: ['image', 'gcr.io/${_PROJECT_ID}/api-fetcher-cb']
 
