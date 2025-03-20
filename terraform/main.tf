@@ -48,6 +48,10 @@ resource "google_cloud_run_service" "api_fetcher_cb" {
     }
   }
 
+  lifecycle {
+    create_before_destroy = true  # Ensures the new function is created before the old one is destroyed
+  }
+
   traffic {
     percent         = 100
     latest_revision = true
