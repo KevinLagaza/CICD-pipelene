@@ -37,7 +37,7 @@ jobs:
           docker build -t gcr.io/${{ variables.GCP_PROJECT_ID }}/api-fetcher-cb:latest .
           docker push gcr.io/${{ variables.GCP_PROJECT_ID }}/api-fetcher-cb:latest
         env: 
-          GCP_PROJECT_ID: ${{ variables.GCP_PROJECT_ID }}
+          GCP_PROJECT_ID: ${{ env.GCP_PROJECT_ID }}
 
   deploy-to-cloud-run:
     needs: build-and-push-docker
