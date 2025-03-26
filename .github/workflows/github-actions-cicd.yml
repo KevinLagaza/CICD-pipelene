@@ -44,11 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Move to Terraform directory
-        run: cd terraform
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
       - name: Terraform Init
+        working-directory: ./terraform  # Change to Terraform dir
         run: terraform init
       - name: Terraform Apply
         run: terraform apply -auto-approve
