@@ -9,6 +9,7 @@ app = Flask(__name__)
 def fetch_data():
     """ Fetch data from API 
     """
+    
     try:
         API_URL = os.getenv("API_URL")
         bucket_name = os.getenv("GCS_BUCKET_NAME")
