@@ -50,6 +50,7 @@ jobs:
         working-directory: ./terraform  # Change to Terraform dir
         run: terraform init
       - name: Terraform Apply
+        working-directory: ./terraform  # Change to Terraform dir
         run: terraform apply -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
