@@ -8,7 +8,7 @@ on:
 
 jobs:
   fetch-and-store:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -25,7 +25,7 @@ jobs:
 
   build-scan-and-push-docker:
     needs: fetch-and-store
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Build Docker Image
@@ -54,7 +54,7 @@ jobs:
 
   deploy-to-cloud-run:
     needs: build-scan-and-push-docker
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Set up Terraform
