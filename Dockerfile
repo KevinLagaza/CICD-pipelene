@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM python:3.10-slim
 # Create a new user and group
 RUN groupadd -r appuser && \
