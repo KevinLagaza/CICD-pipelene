@@ -2,10 +2,11 @@ import requests
 import os
 from google.cloud import storage
 from flask import Flask, jsonify
+from flask_wtf.csrf import CSRFProtect  # Correct import
 
 app = Flask(__name__)
-csrf = CSRFProtect()
-csrf.init_app(app)
+app.config['SECRET_KEY'] = os.get('SECRET_KEY')  # Required for CSRF
+csrf = CSRFProtect(app)  # Initialize extension
 
 @app.route("/")
 def fetch_data():
