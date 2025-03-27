@@ -23,6 +23,24 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      - name: Run GitLeaks
+        id: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          format: "json"
+          report-path: "gitleaks-report.json"
+          exit-code: 0  # Don't fail on first run
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.json
+      - name: Fail if new leaks
+        if: steps.gitleaks.outputs.findingCount > 0
+        run: |
+          echo "::error::Found ${{ steps.gitleaks.outputs.findingCount }} secrets"
+          exit 1
+          retention-days: 1
 
   build_project_and_sonar_scan:
     runs-on: self-hosted
@@ -63,27 +81,6 @@ jobs:
           exit-code: '0'  # "1" --> Fail the build if vulnerabilities are found, "0" --> Continue the build if vulnerabilities are found
           severity: 'CRITICAL,HIGH'  # Only fail on critical/high vulnerabilities
           ignore-unfixed: true  # Skip vulnerabilities with no available fix
-      - name: Scan for secrets
-        uses: gitleaks/gitleaks-action@v2
-        with:
-          docker: true
-          image: gcr.io/${{ vars.GCP_PROJECT_ID }}/api-fetcher-cb:latest
-          format: "json"  # Output format
-          report-path: "gitleaks-report.json"  # Save to file
-          redact: true  # Redact secrets in output
-          exit-code: 0  # Continue even if leaks found
-          # Set exit-code: 1 to fail on leaks
-      - name: Display report location
-        run: |
-          echo "GitLeaks report saved to: $(pwd)/gitleaks-report.json"
-          echo "Found ${{ steps.gitleaks.outputs.findingCount }} secrets"
-
-      - name: Upload report as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gitleaks-report
-          path: gitleaks-report.json
-          retention-days: 1
       # - name: Gitleaks Code Scan
       #   run: gitleaks detect source . -r gitleaks-report.json -f json
       - name: Login to GCR
