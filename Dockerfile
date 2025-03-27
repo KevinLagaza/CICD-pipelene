@@ -3,7 +3,6 @@ WORKDIR /app
 WORKDIR /app/cache
 COPY requirements.txt .
 RUN pip install --disable-pip-version-check --cache-dir /app/cache -r requirements.txt
-COPY ./.github/github-actions-cicd.yml /.github/github-actions-cicd.yml
 COPY ./terraform /terraform
 COPY ./app.py app.py
 COPY ./requirements.txt requirements.txt
