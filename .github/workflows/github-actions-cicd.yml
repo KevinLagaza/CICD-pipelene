@@ -54,12 +54,12 @@ jobs:
           echo "GitLeaks report saved to: $(pwd)/gitleaks-report.json"
           echo "Found ${{ steps.gitleaks.outputs.findingCount }} secrets"
 
-      # - name: Upload report as artifact (optional)
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: gitleaks-report
-      #     path: gitleaks-report.json
-      #     retention-days: 1
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.json
+          retention-days: 1
       # - name: Gitleaks Code Scan
       #   run: gitleaks detect source . -r gitleaks-report.json -f json
       - name: Login to GCR
