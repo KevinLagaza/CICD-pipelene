@@ -6,8 +6,7 @@ RUN groupadd -r appuser && \
 WORKDIR /app
 WORKDIR /app/cache
 # Grant permissions
-RUN chown -R appuser:appuser /app
-RUN chown -R appuser:appuser /app/cache
+RUN chown -R appuser:appuser /app /app/cache
 # Switch to the new user
 USER appuser
 # Copy only the necesserary files
