@@ -72,7 +72,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build Docker Image
-        run: docker build -t gcr.io/${{ vars.GCP_PROJECT_ID }}/api-fetcher-cb:latest .
+        run: docker buildx build -t gcr.io/${{ vars.GCP_PROJECT_ID }}/api-fetcher-cb:latest .
       - name: Scan Docker Image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
@@ -88,7 +88,7 @@ jobs:
           username: _json_key
           password: ${{ secrets.GCP_SA_KEY }}
       - name: Push Docker Image to GCR
-        run: docker push gcr.io/${{ vars.GCP_PROJECT_ID }}/api-fetcher-cb:latest
+        run: docker buildx push gcr.io/${{ vars.GCP_PROJECT_ID }}/api-fetcher-cb:latest
 
   deploy-to-cloud-run:
     needs: build-scan-and-push-docker
