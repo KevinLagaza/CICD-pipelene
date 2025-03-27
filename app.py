@@ -5,7 +5,7 @@ from flask import Flask, jsonify
 from flask_wtf.csrf import CSRFProtect  # Correct import
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  # Required for CSRF
+app.config['password'] = os.getenv('password')  # Required for CSRF
 csrf = CSRFProtect(app)  # Initialize extension
 
 @app.route("/")
