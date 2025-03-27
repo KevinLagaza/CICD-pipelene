@@ -40,13 +40,9 @@ jobs:
           severity: 'CRITICAL,HIGH'  # Only fail on critical/high vulnerabilities
           ignore-unfixed: true  # Skip vulnerabilities with no available fix
       - name: Gitleaks Installation
-        run: |
-          # Download the latest binary
-          curl -sSfL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_$(uname -s)_$(uname -m).tar.gz | tar xz -C /usr/local/bin gitleaks
-          # Make it executable
-          chmod +x /usr/local/bin/gitleaks
-          # Verify installation
-          gitleaks version
+      - uses: gitleaks/gitleaks-action@v2
+        with: 
+          version: v8.18.1  # specify version
       - name: Gitleaks Code Scan
         run: gitleaks detect source . -r gitleaks-report.json -f json
       - name: Login to GCR
