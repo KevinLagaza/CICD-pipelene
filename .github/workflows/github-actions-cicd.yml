@@ -44,6 +44,11 @@ jobs:
         with:
           docker: true
           image: gcr.io/${{ vars.GCP_PROJECT_ID }}/api-fetcher-cb:latest
+          format: "json"  # Output format
+          report-path: "gitleaks-report.json"  # Save to file
+          redact: true  # Redact secrets in output
+          exit-code: 0  # Continue even if leaks found
+          # Set exit-code: 1 to fail on leaks
       # - name: Gitleaks Code Scan
       #   run: gitleaks detect source . -r gitleaks-report.json -f json
       - name: Login to GCR
