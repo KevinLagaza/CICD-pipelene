@@ -22,6 +22,7 @@ jobs:
         run: python3 app.py
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
   build_project_and_sonar_scan:
     runs-on: self-hosted
