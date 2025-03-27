@@ -11,10 +11,10 @@ RUN chown -R appuser:appuser /app/cache
 # Switch to the new user
 USER appuser
 # Copy only the necesserary files
-COPY --chown=appuser:appuser requirements.txt .
-COPY --chown=appuser:appuser ./terraform .
-COPY --chown=appuser:appuser ./app.py .
-COPY --chown=appuser:appuser ./sonar-project.properties .
+COPY --chmod=755 requirements.txt .
+COPY --chmod=755 ./terraform .
+COPY --chmod=755 ./app.py .
+COPY --chmod=755 ./sonar-project.properties .
 # Install all the required packages
 RUN pip install --disable-pip-version-check --cache-dir /app/cache -r requirements.txt
 # Command to run the application using gunicorn
