@@ -25,8 +25,9 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
       - name: Run GitLeaks
         id: gitleaks
-        uses: gitleaks/gitleaks-action@v3
+        uses: gitleaks/gitleaks-action@v2
         with:
+          version: v8.18.1
           format: "json"
           report-path: "gitleaks-report.json"
           exit-code: 0  # Don't fail on first run
